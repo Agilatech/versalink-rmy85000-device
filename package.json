@@ -1,0 +1,34 @@
+{
+  "name": "versalink-rmy85000-device",
+  "version": "0.8.0",
+  "description": "RMY85000 Ultrasonic Anemometer device driver for use in the Agilatech VersaLink system",
+  "main": "rmy85000.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agilatech/versalink-rmy85000-device.git"
+  },
+  "keywords": [
+    "sensor",
+    "Wind Speed",
+    "Wind Direction",
+    "Ultrasonic Anemometer",
+    "beaglebone",
+    "raspberry pi"
+  ],
+  "author": "Agilatech <scott@agilatech.com> (http://agilatech.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Agilatech/versalink-rmy85000-device/issues"
+  },
+  "homepage": "https://github.com/Agilatech/versalink-rmy85000-device#readme",
+  "dependencies": {
+    "versalink-device": "*",
+    "@agilatech/rmy85000": "*"
+  }
+}
