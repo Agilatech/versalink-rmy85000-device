@@ -10,7 +10,7 @@
 
 const fs     = require('fs');
 const zetta  = require('zetta');
-const sensor = require('./rmy85000-scout');
+const sensor = require('../rmy85000-scout');
 const app    = require('./apps/rmy85000_app');
 
 const serverPort  = 1107;  // IIOT port definied and claimed by Agilatech
