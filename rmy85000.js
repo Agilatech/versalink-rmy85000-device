@@ -32,7 +32,68 @@ module.exports = class Rmy85000 extends VersalinkDevice {
         const hardware = new device.Rmy85000(file);
         
         super(hardware, options);
+
+        this.provideWindProperties();
         
     }
+
+    addMonitoredProperties(config) {
+    	this.avgWind =  0;
+    	this.avgDir =   0;
+    	this.gustWind = 0;
+    	this.gustDir =  0;
+
+    	config.monitor('avgWind').monitor('avgDir').monitor('gustWind').monitor('gustDir');
+    }
+
+    // add the properties which actually matter to wind speed/direction data
+    provideWindProperties() {
+
+    	var self = this;
+
+    	self._speedTotal = 0;
+    	self._dirTotal   = 0;
+    	self._count      = 0;
+    	self._maxSpeed   = 0;
+    	self._maxDir     = 0;
+    
+    	this._windInterval = setInterval(function() {
+
+    		const speed = parseFloat(self.hardware.valueAtIndexSync(0));
+    		const dir = parseInt(self.hardware.valueAtIndexSync(1), 10);
+
+    		self._speedTotal += speed;
+    		self._dirTotal += dir;
+
+    		if (self._count > 58) {
+
+    			self.avgWind = Math.round(self._speedTotal/6) / 10;  // round to 1 decimal place
+
+    			// Yes, yes, we know that this is a bogus way to calc avg dir
+    			self.avgDir  = Math.round(self._dirTotal/60); 
+
+    			self.gustWind = self._maxSpeed;
+    			self.gustDir  = self._maxDir;
+
+    			self._speedTotal = 0;
+		    	self._dirTotal   = 0;
+		    	self._count      = 0;
+		    	self._maxSpeed   = 0;
+		    	self._maxDir     = 0;
+    		}
+    		else {
+    			if (speed > self._maxSpeed) {
+    				self._maxSpeed = speed;
+    				self._maxDir = dir;
+    			}
+    			self._count++;
+    		}
+
+    	}, 1000);
+    }
 }
+
+
+
+
 
