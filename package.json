@@ -1,6 +1,6 @@
 {
-  "name": "versalink-rmy85000-device",
-  "version": "0.10.0",
+  "name": "@agilatech/versalink-rmy85000-device",
+  "version": "0.9.0",
   "description": "RMY85000 Ultrasonic Anemometer device driver for use in the Agilatech VersaLink system",
   "main": "rmy85000-scout.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Agilatech/versalink-rmy85000-device.git"
+    "url": "ssh://scott@209.200.216.6:22125/volume1/git_repos/versalink-rmy85000-device"
   },
   "keywords": [
     "sensor",
@@ -22,13 +22,9 @@
     "raspberry pi"
   ],
   "author": "Agilatech <scott@agilatech.com> (http://agilatech.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Agilatech/versalink-rmy85000-device/issues"
-  },
-  "homepage": "https://github.com/Agilatech/versalink-rmy85000-device#readme",
+  "license": "SEE LICENSE in LICENSE",
   "dependencies": {
-    "versalink-device": "*",
+    "@agilatech/versalink-device": "*",
     "zetta-scout": "*",
     "@agilatech/rmy85000": "*"
   }

@@ -4,21 +4,17 @@ This device driver is specifically designed to be used with the Agilatech VersaL
 
 ###Install
 ```
-$> npm install versalink-rmy85000-device
-```
-OR
-```
-$> git clone https://github.com/Agilatech/versalink-rmy85000-device versalink-rmy85000-device
+$> npm install @agilatech/versalink-rmy85000-device
 ```
 
 ###Usage
-This device driver may be consumed by either the Agilatech VersaLink IOT system, or the
-Apigee Zetta system.
+This device driver is designed to be consumed by the Agilatech VersaLink IOT system.
 ```
-var zetta = require('zetta');
-var rmy85000 = require('versalink-rmy85000-device');
 
-zetta()
+const rmy85000 = require('@agilatech/versalink-rmy85000-device');
+const versalink = require('@agilatech/versalink-server');
+
+versalink()
 .use(rmy85000, [options])  // where [options] define operational paramters -- omit to accept defaults
 .listen(<port number>)   // where <port number> is the port on which the zetta server should listen
 ```
@@ -145,15 +141,3 @@ device file can be specified in the constructor.
 
 ###Copyright
 Copyright © 2016 Agilatech. All Rights Reserved.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
-files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
-WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
