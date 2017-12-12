@@ -1,6 +1,6 @@
 {
   "name": "@agilatech/versalink-rmy85000-device",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "RMY85000 Ultrasonic Anemometer device driver for use in the Agilatech VersaLink system",
   "main": "rmy85000-scout.js",
   "directories": {
