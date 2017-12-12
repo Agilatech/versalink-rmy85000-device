@@ -1,46 +1,51 @@
-
-const options = require('./options');
+const config = require('./config');
 
 const Scout = require('zetta-scout');
-const rmy85000 = require('./rmy85000');
-const util = require('util');
+const Rmy85000 = require('./rmy85000');
 
-const Rmy85000Scout = module.exports = function(opts) {
-    
-  // see if any of the options were overridden in the server
+module.exports = class Rmy85000Scout extends Scout {
 
-  if (typeof opts !== 'undefined') {
-    // copy all options defined in the server
-    for (const key in opts) {
-      if (typeof opts[key] !== 'undefined') {
-        options[key] = opts[key];
+  constructor(opts) {
+
+    super();
+
+    if (typeof opts !== 'undefined') {
+      // copy all config options defined in the server
+      for (const key in opts) {
+        if (typeof opts[key] !== 'undefined') {
+          config[key] = opts[key];
+        }
       }
     }
+
+    if (config.name === undefined) { config.name = "RMY85000" }
+    this.name = config.name;
+
+    this.rmy85000 = new Rmy85000(config);
+
   }
 
-  Scout.call(this);
-};
-
-util.inherits(Rmy85000Scout, Scout);
-
-Rmy85000Scout.prototype.init = function(next) {
-
-  const self = this;
-
-  const Rmy85000 = new rmy85000(options);
-
-  const query = this.server.where({name: 'RMY85000'});
+  init(next) {
+    const query = this.server.where({name: this.name});
   
-  this.server.find(query, function(err, results) {
-    if (results[0]) {
-      self.provision(results[0], Rmy85000, options);
-      self.server.info('Provisioned RMY85000');
-    } else {
-      self.discover(Rmy85000, options);
-      self.server.info('Discovered new device RMY85000');
-    }
-  });
+    const self = this;
 
-  next();
+    this.server.find(query, function(err, results) {
+      if (!err) {
+        if (results[0]) {
+          self.provision(results[0], self.rmy85000);
+          self.server.info('Provisioned known device ' + self.name);
+        } else {
+          self.discover(self.rmy85000);
+          self.server.info('Discovered new device ' + self.name);
+        }
+      }
+      else {
+        self.server.error(err);
+      }
+    });
 
-};
+    next();
+  }
+
+}

@@ -4,14 +4,14 @@ const device = require('@agilatech/rmy85000');
 
 module.exports = class Rmy85000 extends VersalinkDevice {
     
-    constructor(options) {
+    constructor(config) {
         
-        // The file must be defined. If not supplied in options, then default to ttyS0
-        const file  = options['file'] || "/dev/ttyS0";
+        // The file must be defined. If not supplied in config, then default to ttyS0
+        const file  = config['file'] || "/dev/ttyS0";
         
         const hardware = new device.Rmy85000(file);
         
-        super(hardware, options);
+        super(hardware, config);
 
     }
 }
